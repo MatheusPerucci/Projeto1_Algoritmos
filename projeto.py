@@ -32,12 +32,13 @@ def calc_risco(risco, i):
     if risco < 1.5:
         return "Atividade normal"
     elif risco <= 2:
-        return "Oscilação detectada"
+        return "Atividade anormal"
     else:
         return "Risco de acidente"
     return risco/i
 
 def metricas(total, num, leituras, percent_verde, menor, risco):
+    print("\n==============================//==============================\n")
     print(risco)
     print(f"Media: {total / num :.2f}")
     print(f"Porcentagem de zonas verdes:  {percent_verde:.2f}")
@@ -56,9 +57,28 @@ menor = int
 verde = 0
 risco = 0
 
-qtd = int(input("Digite o numero de leituras: "))
+qtd = input("Digite o numero de leituras: ")
+
+while type(qtd) != int:
+    if qtd.isdigit():
+        qtd = int(qtd)
+    else:
+        print("Valor invalido")
+        qtd = input("Digite o numero de leituras: ")
+
+while  qtd < 1: 
+    print("Valor invalido")
+    qtd = int(input("Digite o numero de leituras: ")) 
+
+
 while travamento != 2 and i < qtd:
     upc = int(input("Digite o valor em UPC: "))
+
+    if ajuste_termico(upc) < 0 or ajuste_termico(upc) > 400:
+        aux = int(input("Valor irreal digite novamente o valor: "))
+        if aux != upc:
+            upc = aux
+        print(f"Valor recebido: {upc:.2f}")
 
     upc = ajuste_termico(upc)
     zona = classificar(upc)
