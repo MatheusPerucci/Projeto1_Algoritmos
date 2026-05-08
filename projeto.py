@@ -2,7 +2,7 @@ def ajuste_termico(upc):
     if upc > 150:
         return upc + (upc * 0.08)
     else:
-        return upc + (upc * 0.04)
+        return upc - (upc * 0.04)
 
 def classificar(upc):
     if upc >= 250:
